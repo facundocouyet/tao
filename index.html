@@ -444,6 +444,12 @@
 </head>
 <body>
 
+<script>
+  if (sessionStorage.getItem('demur_auth') !== '1') {
+    window.location.replace('login.html');
+  }
+</script>
+
 <div class="container">
 
 <header>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeMur · Proyecto TAO — Acceso</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0a0a0a;
+    --bg: #FAFAF7;
+    --gray-50: #FAFAF7;
+    --gray-75: #F2F1EC;
+    --gray-100: #ECEAE2;
+    --gray-150: #E2E0D6;
+    --gray-200: #D6D3C7;
+    --gray-300: #BDB9A9;
+    --gray-400: #8E8B7C;
+    --gray-500: #6B695D;
+    --gray-600: #4A4943;
+    --gray-700: #2E2E2A;
+    --gray-800: #1F1F1C;
+    --red: #dc2626;
+    --green: #16a34a;
+    --amber: #d97706;
+  }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--black);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .login-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .login-video {
+    position: relative;
+    overflow: hidden;
+    background: var(--gray-700);
+  }
+  .login-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .login-panel {
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+    overflow-y: auto;
+  }
+
+  .login-inner {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .login-meta {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray-500);
+    margin-bottom: 18px;
+  }
+
+  .login-title {
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    line-height: 1.05;
+    color: var(--black);
+    margin-bottom: 16px;
+  }
+
+  .login-desc {
+    font-size: 16px;
+    color: var(--gray-600);
+    font-weight: 300;
+    line-height: 1.55;
+    margin-bottom: 40px;
+    max-width: 380px;
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .field label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray-500);
+    font-weight: 500;
+  }
+  .field input {
+    font-family: inherit;
+    font-size: 16px;
+    color: var(--black);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--gray-300);
+    padding: 10px 0;
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+  .field input:focus {
+    border-bottom: 2px solid var(--black);
+    padding-bottom: 9px;
+  }
+  .field input::placeholder {
+    color: var(--gray-300);
+    font-weight: 300;
+  }
+
+  .login-btn {
+    margin-top: 14px;
+    width: 100%;
+    background: var(--black);
+    color: var(--bg);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 18px 24px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.15s ease;
+    box-shadow: 0 4px 16px rgba(46, 46, 42, 0.08);
+  }
+  .login-btn:hover {
+    box-shadow: 0 6px 20px rgba(46, 46, 42, 0.18);
+  }
+  .login-btn:active {
+    transform: translateY(1px);
+  }
+
+  .login-error {
+    margin-top: 18px;
+    font-size: 13px;
+    color: var(--red);
+    letter-spacing: 0.5px;
+    display: none;
+  }
+  .login-error.show { display: block; }
+
+  .login-foot {
+    margin-top: 48px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray-400);
+  }
+
+  @media (max-width: 768px) {
+    html, body { overflow: auto; }
+    .login-wrap {
+      grid-template-columns: 1fr;
+      grid-template-rows: 40vh 1fr;
+      height: auto;
+      min-height: 100vh;
+    }
+    .login-panel { padding: 40px 28px; }
+    .login-title { font-size: 34px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="login-wrap">
+
+  <div class="login-video">
+    <video autoplay muted loop playsinline>
+      <source src="docs/tao.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="login-panel">
+    <div class="login-inner">
+      <p class="login-meta">DE MUR &middot; ELEVANDO FUTURO</p>
+      <h1 class="login-title">Acceso al informe</h1>
+      <p class="login-desc">Documento confidencial. Ingres&aacute; tus credenciales para acceder.</p>
+
+      <form class="login-form" id="login-form" autocomplete="off">
+        <div class="field">
+          <label for="usuario">Usuario</label>
+          <input type="text" id="usuario" name="usuario" autocomplete="username" required>
+        </div>
+        <div class="field">
+          <label for="password">Contrase&ntilde;a</label>
+          <input type="password" id="password" name="password" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="login-btn">Ingresar</button>
+        <p class="login-error" id="login-error">Credenciales incorrectas.</p>
+      </form>
+
+      <p class="login-foot">Proyecto TAO &middot; Informe de estado integral</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  (function() {
+    var form = document.getElementById('login-form');
+    var errorEl = document.getElementById('login-error');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var u = document.getElementById('usuario').value.trim();
+      var p = document.getElementById('password').value;
+
+      if (u === 'demur' && p === 'tao2026') {
+        sessionStorage.setItem('demur_auth', '1');
+        window.location.href = 'index.html';
+      } else {
+        errorEl.classList.add('show');
+      }
+    });
+
+    ['usuario', 'password'].forEach(function(id) {
+      document.getElementById(id).addEventListener('input', function() {
+        errorEl.classList.remove('show');
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
